@@ -84,7 +84,8 @@ function printStatus
 function updateSelf
 {
 	cd "$dotfilesDir"
-	if [ git pull origin master ]; then
+	git pull origin master
+	if [ $? -eq 0 ]; then
 		good "updated successfully"
 	else
 		bad "error updating self!"
