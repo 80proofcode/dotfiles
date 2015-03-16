@@ -4,3 +4,5 @@ srcIfThere="$HOME/.profile" && test -r "$srcIfThere" && source "$srcIfThere" && 
 
 srcIfThere="$HOME/.bash_profile.local" && test -r "$srcIfThere" && source "$srcIfThere" && unset srcIfThere
 
+srcIfThere="$HOME/.bashrc" && test -r "$srcIfThere" && source "$srcIfThere" && unset srcIfThere
+
