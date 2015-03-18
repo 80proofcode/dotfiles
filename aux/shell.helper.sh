@@ -21,6 +21,7 @@ alias cd-='cd -'
 alias psa='ps auxww'
 alias ncal='ncal -M'
 alias t='cd /tmp'
+alias llr='ls -lArth'
 
 #safety
 alias rm='rm -i'
