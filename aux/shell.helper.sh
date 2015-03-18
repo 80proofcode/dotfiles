@@ -9,19 +9,25 @@ fi
 ## Aliases - start
 
 alias view='vi -R'
+
 alias ls='ls --color=auto'
 alias sl='ls'
+alias ll='ls -l'
+alias la='ls -la'
+alias llr='ls -lArth'
+
 alias grep='grep --color=auto'
 alias grepi='grep -i'
+
 alias count='sort | uniq -c | sort -rn'
 alias up='(sudo apt-get update ; sudo apt-get upgrade) 2>&1 | tee ~/up/up.log.$(date '+%Y_%m_%d__%H_%M_%S')'
 alias inst='sudo apt-get install'
 #alias qq='sudo ~/psh.sh restart'
-alias cd-='cd -'
 alias psa='ps auxww'
 alias ncal='ncal -M'
+
 alias t='cd /tmp'
-alias llr='ls -lArth'
+alias cd-='cd -'
 
 #safety
 alias rm='rm -i'
