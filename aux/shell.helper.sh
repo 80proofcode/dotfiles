@@ -29,6 +29,9 @@ alias ncal='ncal -M'
 alias t='cd /tmp'
 alias cd-='cd -'
 
+alias le='less -is'
+alias le='less -N'
+
 #safety
 alias rm='rm -i'
 
