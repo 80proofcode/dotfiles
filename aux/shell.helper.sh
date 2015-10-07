@@ -1,6 +1,7 @@
-echo "loading shell.helper.sh ..."
+printf "loading shell.helper.sh ... "
 
 if [ ! -z "$beenHere" ]; then
+	printf "skipping\n"
 	return
 else
 	beenHere=true
@@ -68,3 +69,5 @@ pdfman()
 }
 
 ## Functions - end
+
+printf "done\n"
