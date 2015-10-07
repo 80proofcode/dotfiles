@@ -30,7 +30,7 @@ alias t='cd /tmp'
 alias cd-='cd -'
 
 alias le='less -is'
-alias len='less -N'
+alias len='less -isN'
 
 #safety
 alias rm='rm -i'
