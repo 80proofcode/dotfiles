@@ -30,6 +30,8 @@ alias ncal='ncal -M'
 alias t='cd /tmp'
 alias cd-='cd -'
 
+alias ptree='ps -auxwwwf|less -i'
+
 alias le='less -is'
 alias len='less -isN'
 
