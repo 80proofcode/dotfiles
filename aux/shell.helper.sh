@@ -35,6 +35,8 @@ alias ptree='ps -auxwwwf|less -i'
 alias le='less -is'
 alias len='less -isN'
 
+alias rl='readlink -f'
+
 #safety
 alias rm='rm -i'
 
