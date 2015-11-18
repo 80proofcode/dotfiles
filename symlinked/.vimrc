@@ -1,6 +1,6 @@
 set number
 colorscheme elflord
-#colorscheme torte
+"colorscheme torte
 set mouse=a
 set ic
 set hlsearch
