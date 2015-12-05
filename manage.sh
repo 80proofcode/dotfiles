@@ -81,6 +81,18 @@ function printStatus
 	done
 }
 
+function updateForceSelf
+{
+	cd "$dotfilesDir"
+	git reset --hard
+	if [ $? -eq 0 ]; then
+		good "reset all local changes successfully"
+	else
+		bad "error forcing the reset self!"
+	fi
+	updateSelf
+}
+
 function updateSelf
 {
 	cd "$dotfilesDir"
@@ -214,6 +226,9 @@ case "$1" in
 		;;
 	update)
 		updateSelf
+		;;
+	updateForce)
+		updateForceSelf
 		;;
 	install)
 		installSelf
