@@ -40,6 +40,8 @@ alias rl='readlink -f'
 #safety
 alias rm='rm -i'
 
+alias c3='cal -3'
+
 ## Aliases - end
 
 ## Environment variables - start
