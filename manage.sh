@@ -104,6 +104,19 @@ function updateSelf
 	fi
 }
 
+function installOhMyZshSelf
+{
+	if $(which wget 2>&1 1> /dev/null) ; then
+		good found and using wget ...
+		sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+	elif $(which curl 2>&1 1> /dev/null); then
+		good found and using curl ...
+		sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+	else
+		bad "couldn't find wget or curl, you're on your own"
+	fi
+}
+
 function uninstallSelf
 {
 	for f in "${fns[@]}"; do
@@ -235,6 +248,9 @@ case "$1" in
 		;;
 	uninstall)
 		uninstallSelf
+		;;
+	installOhMyZsh)
+		installOhMyZshSelf
 		;;
 	*)
 		usage
