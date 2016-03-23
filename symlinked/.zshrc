@@ -44,6 +44,8 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga
 
 auxDir="$(dirname "$(readlink -f "$HOME/.zshrc")")/../aux"
 
+which fortune >/dev/null 2>1 && (echo -e "\033[36mThis moment's fortune:\033[00m" && fortune -a)
+
 srcIfThere="$auxDir/shell.helper.sh" && test -r "$srcIfThere" && source "$srcIfThere" && unset srcIfThere
 
 srcIfThere="$HOME/.zshrc.local" && test -r "$srcIfThere" && source "$srcIfThere" && unset srcIfThere
