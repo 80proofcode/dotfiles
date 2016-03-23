@@ -13,7 +13,7 @@ HISTSIZE=10000
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
 
-which fortune >/dev/null 2>1 && (echo "\033[36mThis moment's fortune:\033[00m" && fortune -a)
+which fortune >/dev/null 2>1 && (echo -e "\033[36mThis moment's fortune:\033[00m" && fortune -a)
 
 srcIfThere="$HOME/.bashrc.local" && test -r "$srcIfThere" && source "$srcIfThere" && unset srcIfThere
 
