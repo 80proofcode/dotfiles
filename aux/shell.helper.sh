@@ -86,6 +86,7 @@ pdfman()
 
 # shamelessly plagirized from SU
 function countdown(){
+   [ -z "$1" ] && echo "usage: countdown <seconds>" && return
    date1=$((`date +%s` + $1)); 
    while [ "$date1" -ge `date +%s` ]; do 
      echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
