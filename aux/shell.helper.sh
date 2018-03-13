@@ -32,9 +32,9 @@ alias inst='sudo apt-get install'
 alias psa='ps auxww'
 
 #get the best calendar available
-if which ncal &>/dev/null && \\ncal -MC &>/dev/null; then
+if which ncal &>/dev/null && \ncal -MC &>/dev/null; then
 	alias cal='ncal -MC'
-elif which cal &>/dev/null && \\cal -m &>/dev/null; then
+elif which cal &>/dev/null && \cal -m &>/dev/null; then
 	alias cal='cal -m'
 fi
 alias c3='cal -3'
