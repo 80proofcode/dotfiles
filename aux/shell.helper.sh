@@ -12,7 +12,6 @@ fi
 alias view='vi -R'
 
 alias ls='ls --color=auto'
-alias sl='ls'
 alias ll='ls -l'
 alias la='ls -la'
 alias lh='ls -lh'
@@ -21,12 +20,24 @@ alias llr='ls -lArth'
 alias grep='grep --color=auto'
 alias grepi='grep -i'
 
+#typos
+alias sl='ls'
+alias grpe='grep'
+alias pdw='pwd'
+
 alias count='sort | uniq -c | sort -rn'
 alias up='(sudo apt-get update ; sudo apt-get upgrade) 2>&1 | tee ~/up/up.log.$(date '+%Y_%m_%d__%H_%M_%S')'
 alias inst='sudo apt-get install'
 #alias qq='sudo ~/psh.sh restart'
 alias psa='ps auxww'
-alias ncal='ncal -M'
+
+#get the best calendar available
+if which ncal &>/dev/null && \\ncal -MC &>/dev/null; then
+	alias cal='ncal -MC'
+elif which cal &>/dev/null && \\cal -m &>/dev/null; then
+	alias cal='cal -m'
+fi
+alias c3='cal -3'
 
 alias t='cd /tmp'
 alias cd-='cd -'
@@ -40,8 +51,6 @@ alias rl='readlink -f'
 
 #safety
 alias rm='rm -i'
-
-alias c3='cal -3'
 
 ## Aliases - end
 
