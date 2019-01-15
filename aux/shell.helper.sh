@@ -102,6 +102,52 @@ function stopwatch(){
    done
 }
 
+function weather()
+{
+	# http://wttr.in/:help
+	which curl >/dev/null 2>&1 || { echo "Weather Error: no CURL found" && exit 1; }
+
+	# starting default values
+	local url_domain="www.wttr.in"
+	local width=""
+	local days="0"
+	local units="u"
+	local location=""
+	local url_protocol="https"
+	local print_debug="false"
+	
+	# adjust width to terminal size
+	[ "$COLUMNS" -lt 125 ] && width="n"
+
+	# because apparently you need to change the damn index manually for multiple executions
+	OPTIND=1
+	while getopts 'nw123CFhd' weather_option; do
+		case "$weather_option" in
+			n) width="n";; # narrow
+			w) width="";; # wide
+			[123]) days="$weather_option";;
+			C) units="m";; # metric
+			F) units="u";; # uscs
+			h) url_protocol="http";;
+			d) print_debug="true";;
+		esac
+	done
+	shift "$(($OPTIND-1))"
+
+	location="$*"
+	echo "$location" | tr '[A-Z]' '[a-z]' | grep -iq "home\|ohm\|bk\|brooklyn" 
+	[ $? -eq 0 ] && location="Brooklyn, NY"
+	[ ! -z "$location" ] && location="~$location"
+	
+	# construct the URL
+	local url_final="$url_protocol://$url_domain/$location?F$width$days$units"
+
+	[ "$print_debug" == "true" ] && echo "Debug info: width=[$width] days=[$days] units=[$units] location=[$location]"
+	
+	# --compressed
+	curl "$url_final"
+}
+
 ## Functions - end
 
 printf "done\n"
