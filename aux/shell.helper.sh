@@ -142,7 +142,10 @@ function weather()
 	# construct the URL
 	local url_final="$url_protocol://$url_domain/$location?F$width$days$units"
 
-	[ "$print_debug" = "true" ] && echo "Debug info: width=[$width] days=[$days] units=[$units] location=[$location]"
+	if [ "$print_debug" = "true" ]; then
+		echo "Debug info: width=[$width] days=[$days] units=[$units] location=[$location]"
+		echo "Debug info: url=[$url_final]"
+	fi
 	
 	# --compressed
 	curl "$url_final"
