@@ -151,6 +151,25 @@ function weather()
 	curl "$url_final"
 }
 
+function trail()
+{
+	SECS_TO_WAIT=5
+	f="$1"
+	if [ ! -r $f ] && echo "no such file: $f" && return
+	s0=0
+	while sleep 1; do
+		s=$(wc -l $f | cut -d\  -f1)
+		rate=$(($s-$s0))
+		if [[ $s0 -eq $s && s0 -ge 0 ]]; then
+			if [[ $((SECS_TO_WAIT--)) -le 0 ]]; then
+				return
+			fi
+		fi
+		printf "current line count: %s, rate: %s/sec\n" "$s" "$rate"
+		s0=$s
+	done
+}
+
 ## Functions - end
 
 printf "done\n"
