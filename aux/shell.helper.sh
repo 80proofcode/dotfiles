@@ -154,18 +154,27 @@ function weather()
 function trail()
 {
 	SECS_TO_WAIT=5
+	local target f
 	f="$1"
-	if [ ! -r $f ] && echo "no such file: $f" && return
+	[ ! -r $f ] && echo "no such file: $f" && return
+	{ [ $2 -gt 0 ] 2>/dev/null && target=$2 } || echo "[$2] not acceptable numeric target, ignoring"
 	s0=0
 	while sleep 1; do
 		s=$(wc -l $f | cut -d\  -f1)
 		rate=$(($s-$s0))
+		#if starting at zero, rate it at zero
+		[[ $s0 -eq 0 ]] && rate=0
 		if [[ $s0 -eq $s && s0 -ge 0 ]]; then
 			if [[ $((SECS_TO_WAIT--)) -le 0 ]]; then
 				return
 			fi
 		fi
-		printf "current line count: %s, rate: %s/sec\n" "$s" "$rate"
+		printf "$(basename $f) line count: %s, rate: %s/sec" "$s" "$rate"
+		if [[ $rate -ne 0 && ! -z $target && $target -ge $s ]]; then
+			eta="$((($target-$s)/$rate))"
+			printf ", eta: %02d:%02d" "$(($eta/60))" "$(($eta%60))"
+		fi
+		printf "\n"
 		s0=$s
 	done
 }
