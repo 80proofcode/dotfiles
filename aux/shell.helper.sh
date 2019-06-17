@@ -159,6 +159,8 @@ function trail()
 	[ ! -r $f ] && echo "no such file: $f" && return
 	{ [ $2 -gt 0 ] 2>/dev/null && target=$2 } || echo "[$2] not acceptable numeric target, ignoring"
 	s0=0
+	av_size=10
+	av_array=()
 	while sleep 1; do
 		s=$(wc -l $f | cut -d\  -f1)
 		rate=$(($s-$s0))
@@ -173,8 +175,18 @@ function trail()
 		if [[ $rate -ne 0 && ! -z $target && $target -ge $s ]]; then
 			eta="$((($target-$s)/$rate))"
 			printf ", eta: %02d:%02d" "$(($eta/60))" "$(($eta%60))"
+			# and now the running average ...
+			av_array=("$s" "${av_array[@]}")
+			av_array=("${av_array[@]:0:${av_size}}")
+			if [[ "${#av_array[@]}" -ge $av_size ]]; then
+#				echo "${av_array[@]}"
+#				echo "${av_array[1]}-${av_array[${av_size}]} / $av_size"
+				rate10sec=$(( (${av_array[1]}-${av_array[${av_size}]}) / ($av_size-1) ))
+				eta10sec="$((($target-$s)/$rate10sec))"
+				printf ", eta%ssec: %02d:%02d" "$av_size" "$(($eta10sec/60))" "$(($eta10sec%60))"
+			fi
 		fi
-		printf "\n"
+		printf "\n"	
 		s0=$s
 	done
 }
