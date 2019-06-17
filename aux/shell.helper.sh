@@ -186,7 +186,8 @@ function trail()
 				printf ", eta%ssec: %02d:%02d" "$av_size" "$(($eta10sec/60))" "$(($eta10sec%60))"
 			fi
 		fi
-		printf "\n"	
+		#printf "\n"
+		echo -ne "\033[K\r"
 		s0=$s
 	done
 }
