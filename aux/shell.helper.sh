@@ -107,6 +107,7 @@ function weather()
 	if [ "$*" = "-h" ]; then
 		echo "usage: $0 [options] [location zip or name, defaults to Brooklyn, NY]"
 		echo "options are: n[arrow], w[ide], 1,2,or3 [days worth], C, F, h[ttp-only], d[ebug]"
+		return
 	fi
 
 	# http://wttr.in/:help
