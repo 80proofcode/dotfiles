@@ -105,7 +105,7 @@ function stopwatch(){
 function weather()
 {
 	# http://wttr.in/:help
-	which curl >/dev/null 2>&1 || { echo "Weather Error: no CURL found" && exit 1; }
+	which curl >/dev/null 2>&1 || { echo "Weather Error: no CURL found" && return; }
 
 	# starting default values
 	local url_domain="www.wttr.in"
@@ -190,6 +190,45 @@ function trail()
 		echo -ne "\033[K\r"
 		s0=$s
 	done
+}
+
+function cheat()
+{
+	if [ -z "$*" -o "$*" = "-h" ]; then
+		echo "usage: $0 <command>"
+		echo "usage: $0 <language> <command>"
+		echo "usage: $0 {list|learn} <command>"
+		return
+	fi
+
+	which curl > /dev/null 2>&1
+	[ $? -ne 0 ] && echo "curl not found!" && return
+
+	local HOSTNAME="https://cheat.sh"
+	local QUERY_STRING=""
+	local QUERY_ARGS="?Q"
+	QUERY_ARGS=""
+
+	# just a command by itself
+	if [ "$#" -eq 1 ]; then
+		QUERY_STRING="$1"
+	# learning or listing for a given command
+	elif [ "$1" = "learn" -o "$1" = "list" ]; then
+		local action="$1"
+		shift
+		QUERY_STRING="$1"
+		QUERY_ARGS=":$action"
+	# command for a given language
+	else
+		local language="$1"
+		shift
+		local command_string="$*"
+#		command_string=$(echo "$command_string"|sed 's/\s+/+/g')
+		QUERY_STRING="$language/$command_string"
+	fi
+
+	echo using following URL: \"$HOSTNAME/${QUERY_STRING}/${QUERY_ARGS}\"
+	curl "$HOSTNAME/${QUERY_STRING}/${QUERY_ARGS}"
 }
 
 ## Functions - end
