@@ -237,6 +237,28 @@ function cheat()
 	curl "$HOSTNAME/${QUERY_STRING}/${QUERY_ARGS}"
 }
 
+function peak()
+{
+  if [ -f "$1" ] ; then
+    case $1 in
+      *.tar.bz2)   tar -tvjf $1   ;;
+      *.tar.gz)    tar -tvzf $1   ;;
+      *.bz2)       bunzip2 -v $1   ;;
+      *.rar)       unrar l $1     ;;
+      *.gz)        gunzip -l $1    ;;
+      *.tar)       tar -tvf $1    ;;
+      *.tbz2)      tar -tvjf $1   ;;
+      *.tgz)       tar -tvzf $1   ;;
+      *.zip)       unzip -l $1     ;;
+      *.Z)         uncompress -vl $1;;
+      *.7z)        7z l $1      ;;
+      *)           echo "'$1' cannot be viewed via peak()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file, usage: peak compressed.file"
+  fi
+}
+
 ## Functions - end
 
 printf "done\n"
