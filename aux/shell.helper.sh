@@ -159,7 +159,6 @@ function weather()
 
 function trail()
 {
-	SECS_TO_WAIT=5
 	local target f
 	f="$1"
 	[ ! -r $f ] && echo "no such file: $f" && return
@@ -168,6 +167,7 @@ function trail()
 	av_size=10
 	av_array=()
 	while sleep 1; do
+		SECS_TO_WAIT=5
 		s=$(wc -l $f | cut -d\  -f1)
 		rate=$(($s-$s0))
 		#if starting at zero, rate it at zero
