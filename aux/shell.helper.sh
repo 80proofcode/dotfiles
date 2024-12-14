@@ -34,6 +34,8 @@ alias psa='ps auxww'
 #get the best calendar available
 if which ncal &>/dev/null && \ncal -MC &>/dev/null; then
 	alias cal='ncal -MC'
+if which ncal &>/dev/null && \ncal -Mb &>/dev/null; then
+	alias cal='ncal -Mb'
 elif which cal &>/dev/null && \cal -m &>/dev/null; then
 	alias cal='cal -m'
 fi
