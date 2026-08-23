@@ -39,8 +39,11 @@ plugins=(git)
 
 srcIfThere="$ZSH/oh-my-zsh.sh" && test -r "$srcIfThere" && source "$srcIfThere" && unset srcIfThere
 
-# Customize to your needs...
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+HISTFILE=${HISTFILE:-$HOME/.zsh_history}
+HISTSIZE=100000
+SAVEHIST=100000
+
+export PATH="$HOME/dotfiles/bin:$PATH"
 
 auxDir="$(dirname "$(readlink -f "$HOME/.zshrc")")/../aux"
 
